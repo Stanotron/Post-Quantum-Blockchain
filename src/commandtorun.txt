@@ -1,0 +1,55 @@
+Has to be done in - x64 Native Tools Command Prompt for VS 
+
+after the new bat files -
+
+cd D:\pq-blockchain
+build_cryptotest.bat
+crypto_test.exe
+
+cd D:\pq-blockchain
+build_blockchain.bat
+crypto_blockchain.exe
+
+
+But if we add new files, edit the commands below and use them 
+for testing crypto without blockchain -
+
+cl /EHsc /std:c++17 ^
+  src\main_crypto_test.cpp ^
+  src\algo_config.cpp ^
+  src\crypto_factory.cpp ^
+  src\oqs_mldsa_crypto.cpp ^
+  src\oqs_falcon_crypto.cpp ^
+  src\hawk_crypto.cpp ^
+  src\timing.cpp ^
+  D:\oqs-hawk\dev\Optimized_Implementation\avx2\*.c ^
+  /ID:\pq-blockchain\include ^
+  /ID:\liboqs\build\include ^
+  /ID:\oqs-hawk\dev\Optimized_Implementation\avx2 ^
+  /link /LIBPATH:D:\liboqs\build\lib\Release oqs.lib ^
+        /out:crypto_test.exe
+
+
+for testing crypto on blockchain -
+
+cl /EHsc /std:c++17 /O2 /arch:AVX2 ^
+  src\main_blockchain.cpp ^
+  src\algo_config.cpp ^
+  src\crypto_factory.cpp ^
+  src\oqs_mldsa_crypto.cpp ^
+  src\oqs_falcon_crypto.cpp ^
+  src\hawk_crypto.cpp ^
+  src\timing.cpp ^
+  src\block_utils.cpp ^
+  src\transaction.cpp ^
+  src\block.cpp ^
+  src\blockchain.cpp ^
+  src\wallet.cpp ^
+  D:\oqs-hawk\dev\Optimized_Implementation\avx2\*.c ^
+  /ID:\pq-blockchain\include ^
+  /ID:\liboqs\build\include ^
+  /ID:\oqs-hawk\dev\Optimized_Implementation\avx2 ^
+  /link /LIBPATH:D:\liboqs\build\lib\Release oqs.lib ^
+        /out:crypto_blockchain.exe
+
+
