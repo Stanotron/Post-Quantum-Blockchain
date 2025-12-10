@@ -7,6 +7,6 @@
 void appendUint32(std::vector<uint8_t>& out, uint32_t v);
 void appendUint64(std::vector<uint8_t>& out, uint64_t v);
 
-// Simple non-cryptographic 32-byte hash (FNV-like)
-// This is ONLY for our toy blockchain, not real security.
+// 32-byte hash used for block hashing.
+// Now implemented as SHA3-256 over the input bytes.
 std::array<uint8_t, 32> simpleHash32(const std::vector<uint8_t>& data);
